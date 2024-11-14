@@ -4,8 +4,6 @@ import Loader from '../components/Loader'
 import { motion } from 'framer-motion'
 import {useFetchPost} from '../Hooks'
 
-const url = import.meta.env.VITE_LOCAL_SERVER_URL
-
 function Post() {
 	const { id } = useParams()
 	const post = useFetchPost(id)
@@ -88,7 +86,7 @@ function Post() {
 								animate={{ opacity: 1, x: 0 }}
 								transition={{ duration: 0.6, delay: 0.2 }}
 								className='w-full h-full rounded-[32px] object-cover position-center'
-								src={`${url}/uploads/${post.img}`}
+								src={post.img}
 								alt=''
 							/>
 						</div>

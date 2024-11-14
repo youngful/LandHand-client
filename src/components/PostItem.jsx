@@ -2,8 +2,6 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import PropTypes from 'prop-types'
 
-const url = import.meta.env.VITE_LOCAL_SERVER_URL
-
 function PostItem({ post }) {
 	function formatDate(date) {
 		const options = {
@@ -53,7 +51,8 @@ function PostItem({ post }) {
 			</div>
 			<img
 				className='max-w-[380px] w-full max-h-[328px] h-full rounded-[32px]'
-				src={`${url}/uploads/${post.img}`}
+				// src={`${url}/uploads/${post.img}`}
+				src={post.img}
 				alt='img'
 			/>
 		</motion.div>

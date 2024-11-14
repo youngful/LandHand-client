@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = import.meta.env.VITE_LOCAL_SERVER_URL
+const url = import.meta.env.VITE_SERVER_URL
 
 export const getPosts = async () => {
 	const response = await axios.get(`${url}/post/get_posts`);

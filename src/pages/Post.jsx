@@ -60,7 +60,7 @@ function Post() {
 						<img src='/icons/views.svg' alt='views' /> {post.views}
 					</motion.p>
 
-					<div className='flex justify-between gap-10'>
+					<div className='flex justify-between gap-10 mb-10'>
 						<motion.div
 							initial={{ opacity: 0, x: -30 }}
 							animate={{ opacity: 1, x: 0 }}

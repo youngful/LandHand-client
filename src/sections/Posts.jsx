@@ -1,9 +1,17 @@
 import PostItem from '../components/PostItem'
 import Loader from '../components/Loader'
 import { useFetchPosts } from '../Hooks/index'
+import DropList from '../components/DropList'
+import { filters } from '../components/arrays'
+import { useState } from 'react'
 
 function Posts() {
-	const { filteredPosts, loading } = useFetchPosts()
+	const [selectedFilter, setSelectedFilter] = useState(filters[0])
+	const { filteredPosts, loading } = useFetchPosts(selectedFilter)
+
+	const handleSelect = value => {
+		setSelectedFilter(value) 
+	}
 
 	return (
 		<div id='projects' className='relative mb-16 min-h-[500px]'>
@@ -17,6 +25,9 @@ function Posts() {
 				</div>
 			) : filteredPosts.length ? (
 				<div className='max-w-[var(--container-width)] mx-auto flex flex-col gap-8'>
+					<div className='ml-auto'>
+						<DropList items={filters} onSelect={handleSelect} />
+					</div>
 					{filteredPosts.map(post => (
 						<PostItem key={post._id} post={post} />
 					))}

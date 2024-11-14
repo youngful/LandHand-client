@@ -129,6 +129,12 @@ export const createFields = [
 				message: 'Maximum 1000 characters',
 			}
 		},
-	},
-	
+	},	
+]
+
+export const filters = [
+	'Latest',
+	'Oldest',
+	'Popular',
+	'Unpopular'
 ]

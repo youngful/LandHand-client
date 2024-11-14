@@ -5,6 +5,26 @@ import PropTypes from 'prop-types'
 const url = import.meta.env.VITE_LOCAL_SERVER_URL
 
 function PostItem({ post }) {
+	function formatDate(date) {
+		const options = {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false,
+		};
+	
+		return new Date(date).toLocaleString('en-US', options);
+	}
+
+	const formatContent = (content) => {
+		if (content.length > 470) {
+			return content.slice(0, 470) + '...';
+		}
+		return content;
+	};
+	
 	const { ref, inView } = useInView({
 		triggerOnce: true,
 		threshold: 0.1,
@@ -21,7 +41,8 @@ function PostItem({ post }) {
 			<div className='flex flex-col justify-between'>
 				<div>
 					<h4 className='mb-6 uppercase'>{post.title}</h4>
-					<p>{post.content}</p>
+					<p className='text-[12px] leading-[16px] opacity-[0.5] mb-2'>{formatDate(post.date)}</p>
+					<p>{formatContent(post.content)}</p>
 				</div>
 				<motion.a
 					className='flex items-center gap-4 px-8 py-2 uppercase w-fit secondary_btn'

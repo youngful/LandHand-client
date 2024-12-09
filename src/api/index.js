@@ -40,3 +40,9 @@ export const loginUser = async (data) => {
 	const response = await axios.post(`${url}/user/log_in`, data);
 	return response.data;
 }
+
+export const logoutUser = async () => {
+  const response = await axios.get(`${url}/user/log_out`);
+  localStorage.removeItem('token')
+  return response.data;
+}

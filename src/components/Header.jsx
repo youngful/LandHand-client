@@ -3,12 +3,23 @@ import { motion } from 'framer-motion'
 import { useAuth, useScrollVisibility, useNoScroll } from '../Hooks'
 import CreatePostModal from './CreatePostModal'
 import Search from './Search'
+import { logoutUser } from '../api'
 
 function Header() {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const isVisible = useScrollVisibility()
 	const authenticated = useAuth()
-	useNoScroll(isModalOpen);
+	useNoScroll(isModalOpen)
+
+	const handleLogout = async () => {
+		try{
+			await logoutUser()
+			window.location.reload()
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
 
 	return (
 		<>
@@ -52,6 +63,15 @@ function Header() {
 						>
 							Create Post
 						</motion.button>
+					)}
+
+					{authenticated && (
+						<img
+							src='/icons/log_out.svg'
+							className='h-5 cursor-pointer opacity-[0.5]'
+							alt=''
+							onClick = {() => handleLogout()}
+						/>
 					)}
 				</div>
 			</motion.header>

@@ -4,16 +4,18 @@ import AuthInput from '../components/AuthInput'
 import { motion } from 'framer-motion'
 import { registerUser, loginUser } from '../api'
 import { registerFields } from '../components/arrays'
+import { useScrollVisibility } from '../Hooks'
 
 function SignUp() {
 	const navigate = useNavigate()
+	const isVisible = useScrollVisibility(20)
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		setError,
-		watch
+		watch,
 	} = useForm()
 
 	const password = watch('password')
@@ -44,14 +46,14 @@ function SignUp() {
 		<div>
 			<motion.header
 				initial={{ y: -100 }}
-				animate={{ y: 0 }}
-				transition={{ duration: 0.6 }}
-				className='z-50 bg-[var(--secondary-bg)] w-[var(--container-width)] mx-auto px-10 py-4 rounded-[48px] flex justify-between items-center sticky top-4 mb-[52px]'
+				animate={{ y: isVisible ? 16 : -100 }}
+				transition={{ duration: 0.5 }}
+				className='z-50 bg-[var(--secondary-bg)] max-w-[var(--container-width)] mx-auto px-10 py-4 rounded-[48px] flex justify-between items-center sticky top-4 mb-[52px]'
 			>
 				<a href='/'>
 					<img src='/icons/logo.svg' alt='Logo' />
 				</a>
-				<nav className='flex items-center gap-10'>
+				<nav className='flex items-center gap-10 max-md:gap-4 max-md:text-[14px]'>
 					<Link to='/#about'>About us</Link>
 					<Link to='/#projects'>Projects</Link>
 				</nav>
@@ -87,12 +89,13 @@ function SignUp() {
 							errors={errors}
 							registerOptions={
 								field.name === 'confirmPassword'
-									 ? {
-												...field.register,
-												validate: (value) => value === password || 'Passwords do not match',
-										 }
-									 : field.register
-						 }
+									? {
+											...field.register,
+											validate: value =>
+												value === password || 'Passwords do not match',
+									  }
+									: field.register
+							}
 						/>
 					</motion.div>
 				))}
@@ -110,7 +113,7 @@ function SignUp() {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.4 }}
 					type='submit'
-					className='primary_btn text-[20px] leading-[32px] py-3 px-2'
+					className='primary_btn text-[20px] leading-[32px] py-3 px-2 mb-5'
 				>
 					Sign up
 				</motion.button>

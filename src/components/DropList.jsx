@@ -23,7 +23,7 @@ const DropList = ({ items = [], onSelect }) => {
 				onClick={toggleDropdown}
 				className='bg-white w-full px-6 py-2 rounded-[32px] cursor-pointer text-center flex items-center justify-between'
 			>
-				<span className='font-medium'>{selectedItem}</span>
+				<span className='font-medium max-sm:text-[14px]'>{selectedItem}</span>
 				<img
 					src={`${!isOpen ? '/icons/up.svg' : '/icons/down.svg'}`}
 					alt=''
@@ -42,7 +42,7 @@ const DropList = ({ items = [], onSelect }) => {
 							<li
 								key={index}
 								onClick={() => handleSelect(item)}
-								className='px-4 py-4 cursor-pointer hover:bg-gray-100'
+								className='px-4 py-4 cursor-pointer hover:bg-gray-100 max-sm:text-[14px] max-sm:py-2'
 							>
 								{item}
 							</li>

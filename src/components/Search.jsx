@@ -43,8 +43,8 @@ function Search() {
 	}
 
 	return (
-		<div className='relative max-w-[280px] w-full'>
-			<div className='flex justify-between bg-[#F7F7F9] rounded-[32px] px-8 py-2 items-center gap-4'>
+		<div className='relative w-full'>
+			<div className='flex justify-between bg-[#F7F7F9] rounded-[32px] px-8 py-2 items-center gap-4 max-md:py-1 max-xs:px-3'>
 				<input
 					type='text'
 					value={query}
@@ -52,7 +52,7 @@ function Search() {
 					onFocus={handleFocus}
 					onBlur={handleBlur}
 					placeholder='Search...'
-					className='flex-grow bg-transparent outline-none placeholder:text-black'
+					className='bg-transparent outline-none max-w-[167px] min-w-[40px] w-full placeholder:text-black max-md:text-[14px]'
 				/>
 				<img
 					src='/icons/search.svg'

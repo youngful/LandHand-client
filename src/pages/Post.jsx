@@ -60,12 +60,12 @@ function Post() {
 						<img src='/icons/views.svg' alt='views' /> {post.views}
 					</motion.p>
 
-					<div className='flex justify-between gap-10 mb-10'>
+					<div className='flex justify-between gap-10 mb-10 max-lg:flex-wrap-reverse max-lg:justify-center'>
 						<motion.div
 							initial={{ opacity: 0, x: -30 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.6, delay: 0.2 }}
-							className='max-w-[586px] w-full text-[20px] leading-[32px]'
+							className='max-w-[586px] w-full text-[20px] leading-[32px] max-sm:text-[16px] max-sm:leading-[24px]'
 						>
 							{formatContent(post.content)}
 

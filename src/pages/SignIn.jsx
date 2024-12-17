@@ -5,9 +5,11 @@ import { motion } from 'framer-motion'
 import { loginUser } from '../api'
 import { useNavigate } from 'react-router-dom'
 import { loginFields } from '../components/arrays'
+import { useScrollVisibility } from '../Hooks'
 
 function SignIn() {
 	const navigate = useNavigate()
+	const isVisible = useScrollVisibility(20)
 
 	const {
 		register,
@@ -30,14 +32,14 @@ function SignIn() {
 		<div>
 			<motion.header
 				initial={{ y: -100 }}
-				animate={{ y: 0 }}
-				transition={{ duration: 0.6 }}
-				className='z-50 bg-[var(--secondary-bg)] w-[var(--container-width)] mx-auto px-10 py-4 rounded-[48px] flex justify-between items-center sticky top-4 mb-[136px]'
+				animate={{ y: isVisible ? 16 : -100 }}
+				transition={{ duration: 0.5 }}
+				className='z-50 bg-[var(--secondary-bg)] max-w-[var(--container-width)] mx-auto px-10 py-4 rounded-[48px] flex justify-between items-center sticky top-4 mb-[136px] max-lg:mb-[56px]'
 			>
 				<a href='/'>
 					<img src='/icons/logo.svg' alt='Logo' />
 				</a>
-				<nav className='flex items-center gap-10'>
+				<nav className='flex items-center gap-10 max-md:gap-4 max-md:text-[14px]'>
 					<Link to='/#about'>About us</Link>
 					<Link to='/#projects'>Projects</Link>
 				</nav>
@@ -93,7 +95,7 @@ function SignIn() {
 					Log In
 				</motion.button>
 
-				<Link to={'/signUp'} className='block underline'>
+				<Link to={'/signUp'} className='block underline mb-5'>
 					First time? Sign up!
 				</Link>
 			</form>

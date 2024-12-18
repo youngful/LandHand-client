@@ -5,7 +5,7 @@ import { createFields } from './arrays'
 import CloseButton from './CloseButton'
 import { useState } from 'react'
 import FileInput from './FileInput'
-import { createPost } from '../api'
+import { createPost } from '../api/postService'
 
 function CreatePostModal({ isOpen, onClose }) {
 	const {
@@ -19,7 +19,7 @@ function CreatePostModal({ isOpen, onClose }) {
 	const onSubmitPost = async data => {
 		const formData = new FormData()
 
-		formData.append('token', localStorage.getItem('token'))
+		formData.append('token', localStorage.getItem('accessToken'))
 		formData.append('title', data.title)
 		formData.append('content', data.content)
 

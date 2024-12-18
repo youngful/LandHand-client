@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import AuthInput from '../components/AuthInput'
 import { motion } from 'framer-motion'
-import { registerUser, loginUser } from '../api'
+import { registerUser, loginUser } from '../api/userService'
 import { registerFields } from '../components/arrays'
 import { useScrollVisibility } from '../Hooks'
 
@@ -30,12 +30,11 @@ function SignUp() {
 			}
 
 			await registerUser(data)
-			const response = await loginUser({
+			await loginUser({
 				email: data.email,
 				password: data.password,
 			})
 
-			localStorage.setItem('token', response.token)
 			navigate('/')
 		} catch (error) {
 			console.log(error)

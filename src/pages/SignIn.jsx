@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import AuthInput from '../components/AuthInput'
 import { motion } from 'framer-motion'
-import { loginUser } from '../api'
+import { loginUser } from '../api/userService'
 import { useNavigate } from 'react-router-dom'
 import { loginFields } from '../components/arrays'
 import { useScrollVisibility } from '../Hooks'
@@ -19,9 +19,7 @@ function SignIn() {
 
 	const onSubmit = async data => {
 		try {
-			const response = await loginUser(data)
-
-			localStorage.setItem('token', response.token)
+			await loginUser(data)
 			navigate('/')
 		} catch (error) {
 			console.log(error)

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPosts } from '../api'
+import { getPosts } from '../api/postService'
 import { setPosts, setLoading, setError } from '../store/slice/posts.slice'
 
 const useFetchPosts = selectedFilter => {

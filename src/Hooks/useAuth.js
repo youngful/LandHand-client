@@ -1,30 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import api from '../api/api';
 
 const useAuth = () => {
-	const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(false);
 
-	useEffect(() => {
-		const checkToken = () => {
-			const token = localStorage.getItem('token')
-			setAuthenticated(!!token)
-		}
+  useEffect(() => {
+    const checkAndRefreshToken = async () => {
+      const token = localStorage.getItem('accessToken');
 
-		checkToken()
+      if (token && isTokenValid(token)) {
+        setAuthenticated(true);
+      } else {
+        try {
+          const response = await api.post('/user/refresh_token', {}, { withCredentials: true });
+          localStorage.setItem('accessToken', response.data.accessToken);
+          setAuthenticated(true);
+        } catch (error) {
+          console.error('Unable to refresh token:', error);
 
-		const handleStorageChange = (event) => {
-			if (event.key === 'token') {
-				checkToken()
-			}
-		}
+          localStorage.removeItem('accessToken');
+          setAuthenticated(false);
+        }
+      }
+    };
 
-		window.addEventListener('storage', handleStorageChange)
+    checkAndRefreshToken();
+  }, []);
 
-		return () => {
-			window.removeEventListener('storage', handleStorageChange)
-		}
-	}, [])
+  return authenticated;
+};
 
-	return authenticated
-}
+const isTokenValid = (token) => {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.exp * 1000 > Date.now(); 
+  } catch {
+    console.error('Invalid token format');
+    return false;
+  }
+};
 
-export default useAuth
+export default useAuth;

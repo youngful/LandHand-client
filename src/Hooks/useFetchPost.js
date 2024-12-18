@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getPost, setViewCount } from '../api'
+import { getPost, setViewCount } from '../api/postService'
 
 const useFetchPost = (id) => {
 	const [post, setPost] = useState(null)

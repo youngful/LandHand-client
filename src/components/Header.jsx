@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useAuth, useScrollVisibility, useNoScroll } from '../Hooks'
 import CreatePostModal from './CreatePostModal'
 import Search from './Search'
-import { logoutUser } from '../api'
+import { logoutUser } from '../api/userService'
 import Burger from './Burger'
 
 function Header() {

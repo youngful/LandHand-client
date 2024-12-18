@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../api/api';
+import { checkToken } from '../api/userService'
 
 const useAuth = () => {
   const [authenticated, setAuthenticated] = useState(false);
@@ -7,13 +8,12 @@ const useAuth = () => {
   useEffect(() => {
     const checkAndRefreshToken = async () => {
       const token = localStorage.getItem('accessToken');
-
       if (token && isTokenValid(token)) {
         setAuthenticated(true);
       } else {
-        const hasRefreshToken = document.cookie.includes('refreshToken=');
-
-        if (!hasRefreshToken) {
+				const refreshToken = await checkToken();
+								
+        if (!refreshToken) {
           setAuthenticated(false);
           return;
         }

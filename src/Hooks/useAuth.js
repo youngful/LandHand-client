@@ -11,6 +11,13 @@ const useAuth = () => {
       if (token && isTokenValid(token)) {
         setAuthenticated(true);
       } else {
+        const hasRefreshToken = document.cookie.includes('refreshToken=');
+
+        if (!hasRefreshToken) {
+          setAuthenticated(false);
+          return;
+        }
+
         try {
           const response = await api.post('/user/refresh_token', {}, { withCredentials: true });
           localStorage.setItem('accessToken', response.data.accessToken);

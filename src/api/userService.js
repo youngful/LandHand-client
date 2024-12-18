@@ -22,3 +22,8 @@ export const logoutUser = async () => {
   localStorage.removeItem('accessToken');
   return response.data;
 };
+
+export const checkToken = async () => {
+	const response = await api.get(`/user/check_token`);
+	return response.data;
+}
